@@ -15,7 +15,7 @@ def respond(
     temperature,
     top_p,
 ):
-    system_message = "You are a good listener. You advise relaxation exercises, suggest avoiding negative thoughts, and guide through steps to manage stress. Discuss what's on your mind, or ask me for a quick relaxation exercise."
+    system_message = "Hello! I'm the Tech Troubleshooter 🖥️. Please describe the technical issue you're facing, and I'll do my best to help you resolve it. Whether it's troubleshooting software problems, hardware issues, or general tech queries, I'm here to assist you!"
     messages = [{"role": "system", "content": system_message}]
 
     for val in history:
@@ -43,27 +43,38 @@ def respond(
 """
 For information on how to customize the ChatInterface, peruse the gradio docs: https://www.gradio.app/docs/chatinterface
 """
+
 demo = gr.ChatInterface(
     respond,
     additional_inputs=[
-        gr.Textbox(value = "You are a good listener. You advise relaxation exercises, suggest avoiding negative thoughts, and guide through steps to manage stress. Discuss what's on your mind, or ask me for a quick relaxation exercise.", label="System message"),
-        gr.Slider(minimum=1, maximum=2048, value=512, step=1, label="Max new tokens"),
+        gr.Textbox(value="Hello! I'm the Tech Troubleshooter 🖥️. Please describe the technical issue you're facing, and I'll do my best to help you resolve it. Whether it's troubleshooting software problems, hardware issues, or general tech queries, I'm here to assist you!", label="System Message", lines=3),
+        gr.Slider(minimum=1, maximum=2048, value=512, step=1, label="Maximum Tokens"),
         gr.Slider(minimum=0.1, maximum=4.0, value=0.7, step=0.1, label="Temperature"),
         gr.Slider(
             minimum=0.1,
             maximum=1.0,
             value=0.95,
             step=0.05,
-            label="Top-p (nucleus sampling)",
+            label="Top-p (Nucleus Sampling)",
         ),
     ],
 
-    examples = [ 
-        ["I feel overwhelmed with work."],
-        ["Can you guide me through a quick meditation?"],
-        ["How do I stop worrying about things I can't control?"]
+    examples=[
+        ["My computer is running slow. How can I speed it up? 🖥️"],
+        ["I'm getting an error message when I try to install software. What should I do? 💻"],
+        ["How do I connect my printer wirelessly to my computer? 🖨️"],
     ],
-    title = 'Calm Mate 🕊️'
+    title='Tech Troubleshooter 🖥️',
+    description='''<div style="text-align: right; font-family: Arial, sans-serif; color: #333;">
+                   <h2>Welcome to the Tech Troubleshooter 🖥️</h2>
+                   <p style="font-size: 16px; text-align: right;">Please describe the technical issue you're facing, and I'll do my best to provide assistance.</p>
+                   <p style="text-align: right;"><strong>Examples:</strong></p>
+                   <ul style="list-style-type: disc; margin-left: 20px; text-align: right;">
+                       <li style="font-size: 14px;">My computer is running slow. How can I speed it up? 🖥️</li>
+                       <li style="font-size: 14px;">I'm getting an error message when I try to install software. What should I do? 💻</li>
+                       <li style="font-size: 14px;">How do I connect my printer wirelessly to my computer? 🖨️</li>
+                   </ul>
+                   </div>''',
 )
 
 
